@@ -26,8 +26,8 @@ const app = express();
 app.use(cors);
 app.use(express.json());
 
-app.post('/signin', loginValidation, login);
-app.post('/signup', createUserValidation, createUser);
+app.post('/api/signin', loginValidation, login);
+app.post('/api/signup', createUserValidation, createUser);
 
 app.use(auth);
 
