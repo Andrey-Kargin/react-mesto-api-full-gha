@@ -77,7 +77,7 @@ function App() {
       });
   }
 
-  //register users
+  //Регистрация
   function handleRegister(regUserData) {
     auth
       .register(regUserData)
