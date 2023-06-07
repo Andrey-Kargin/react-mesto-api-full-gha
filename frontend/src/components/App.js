@@ -30,9 +30,9 @@ function App() {
   const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const jwt = localStorage.getItem("jwt"); 
 
   useEffect(() => { 
-    const jwt = localStorage.getItem("jwt"); 
     if (jwt) { 
       auth 
         .checkToken(jwt) 
@@ -45,7 +45,7 @@ function App() {
         }) 
         .catch((err) => console.log(err)); 
     } 
-  }, []); 
+  }, [jwt]); 
  
   useEffect(() => { 
     Promise.all([ api.getUserInfo(), api.getInitialCards() ]) 
@@ -56,7 +56,7 @@ function App() {
       }) 
       .catch(err => console.log(err)); 
      
-  }, [])
+  }, [jwt])
 
   //авторизация пользователя на странице
   function handleLogin(userData) {
@@ -67,7 +67,7 @@ function App() {
           localStorage.setItem("jwt", res.token);
           setLoggedIn(true);
           setEmail(userData.email);
-          navigate("/react-mesto-auth", { replace: true });
+          navigate("/", { replace: true });
         }
       })
       .catch((err) => {
