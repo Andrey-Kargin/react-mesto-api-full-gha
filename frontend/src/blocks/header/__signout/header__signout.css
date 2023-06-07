@@ -1,0 +1,22 @@
+.header__signout {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  height: 22px;
+  color: #fff;
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  margin-left: 24px;
+  padding: 0;
+}
+
+.header__signout:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .header__signout {
+    display: none;
+  }
+}
