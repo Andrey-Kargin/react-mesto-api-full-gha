@@ -84,7 +84,6 @@ const api = new Api({
   baseUrl: 'https://api.mesto.andreykargin.nomoredomains.rocks/',
   headers: {
     'Content-Type': 'application/json',
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
   }
 });
 
