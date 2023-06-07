@@ -1,0 +1,8 @@
+.place__info {
+  max-width: calc(100% - 2*21px);
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  height: 79px;
+}

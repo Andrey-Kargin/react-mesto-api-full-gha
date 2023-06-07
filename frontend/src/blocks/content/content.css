@@ -1,0 +1,17 @@
+.content {
+  min-height: 75vh;
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 959px) {
+  .content {
+    max-width: calc(100% - 2*40px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    max-width: calc(100% - 2*19px);
+  }
+}

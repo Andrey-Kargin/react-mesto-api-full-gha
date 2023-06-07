@@ -1,0 +1,12 @@
+.profile__info-box {
+  position: relative;
+  display: flex;
+  justify-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__info-box {
+    max-width: 189px;
+    margin: auto;
+  }
+}
