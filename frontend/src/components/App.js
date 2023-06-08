@@ -31,21 +31,21 @@ function App() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => { 
-    const jwt = localStorage.getItem("jwt"); 
-    if (jwt) { 
-      auth 
-        .checkToken(jwt) 
-        .then((res) => { 
-          if (res) { 
-            setLoggedIn(true); 
-            navigate("/react-mesto-auth"); 
-            setEmail(res.data.email); 
-          } 
-        }) 
-        .catch((err) => console.log(err)); 
-    } 
-  }, []); 
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then((res) => {
+        if (!res) {
+          navigate("/signin", { replace: true });
+        }
+
+        setEmail(res.email);
+        setLoggedIn(true);
+        navigate("/", { replace: true });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [navigate]);
  
   useEffect(() => { 
     Promise.all([ api.getUserInfo(), api.getInitialCards() ]) 

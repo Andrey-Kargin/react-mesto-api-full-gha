@@ -21,7 +21,7 @@ function Header(props) {
     <header className="header">
       <img src={Logo} alt="Логотип Место" className="header__logo" />       
         <Routes>
-          <Route exact path='/sign-in' element ={
+          <Route exact path='/signin' element ={
             <div className='header__info'>
           <NavLink to="/sign-up" className="header__link">
             Регистрация
@@ -29,7 +29,7 @@ function Header(props) {
           </div>
           }
           />
-          <Route exact path='/sign-up' element ={
+          <Route exact path='/signup' element ={
             <div className='header__info'>
           <NavLink to="/sign-in" className="header__link">
             Войти
