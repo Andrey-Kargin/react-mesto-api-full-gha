@@ -56,7 +56,7 @@ function App() {
       }) 
       .catch(err => console.log(err)); 
      
-  }, [])
+  }, [loggedIn])
 
   //авторизация пользователя на странице
   function handleLogin(userData) {
