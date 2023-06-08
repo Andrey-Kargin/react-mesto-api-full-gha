@@ -48,6 +48,9 @@ function App() {
   }, []); 
  
   useEffect(() => { 
+    if (loggedIn) {
+
+    }
     Promise.all([ api.getUserInfo(), api.getInitialCards() ]) 
       .then(res => { 
         const [ userInfo, cardsArray ] = res; 
@@ -56,7 +59,7 @@ function App() {
       }) 
       .catch(err => console.log(err)); 
      
-  }, [])
+  }, [loggedIn])
 
   //авторизация пользователя на странице
   function handleLogin(userData) {
