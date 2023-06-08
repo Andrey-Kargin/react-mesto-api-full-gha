@@ -13,33 +13,49 @@ class Api {
   }
   
   getInitialCards() {
+    const jwt = localStorage.getItem("jwt"); 
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      }
     })
     .then(res => this._checkResponse(res));
   }
 
   changeLikeCardStatus(isLiked, cardId) {
+    const jwt = localStorage.getItem("jwt"); 
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
     })
     .then(res => this._checkResponse(res));
   }
 
   getUserInfo() {
+    const jwt = localStorage.getItem("jwt"); 
       return fetch(`${this._baseUrl}/users/me`, {
         method: 'GET',
-        headers: this._headers
+        headers: {
+          authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        }
       })
       .then(res => this._checkResponse(res));
     }
   
   setUserInfo(data) {
+    const jwt = localStorage.getItem("jwt"); 
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -49,9 +65,13 @@ class Api {
   }
 
   addNewCard(data) {
+    const jwt = localStorage.getItem("jwt"); 
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link
@@ -61,17 +81,25 @@ class Api {
   }
    
   deleteCard(cardId) {
+    const jwt = localStorage.getItem("jwt"); 
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
     })
     .then(res => this._checkResponse(res));
   }
 
   updateAvatar(data) {
+    const jwt = localStorage.getItem("jwt"); 
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -82,9 +110,6 @@ class Api {
 
 const api = new Api({
   baseUrl: 'https://api.mesto.andreykargin.nomoredomains.rocks',
-  headers: {
-    'Content-Type': 'application/json',
-  }
 });
 
 export default api;
