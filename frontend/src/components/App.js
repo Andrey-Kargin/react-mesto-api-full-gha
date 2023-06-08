@@ -82,7 +82,7 @@ function App() {
     auth
       .register(regUserData)
       .then(() => {
-        navigate("/sign-in", { replace: true });
+        navigate("/signin", { replace: true });
         setIsRegistrationSuccess(true);
         handleSignup("Вы успешно зарегистрировались!");
       })
@@ -101,7 +101,7 @@ function App() {
   function handleSignout() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
-    navigate("/sign-in", { replace: true });
+    navigate("/signin", { replace: true });
   }
 
   function closeAllPopups() {
@@ -209,9 +209,9 @@ function App() {
      email={email}
     />
         <Routes>
-          <Route exact path="/" element={loggedIn ? <Navigate to="/react-mesto-auth" replace /> : <Navigate to="/sign-in" replace />}/>
-          <Route exact path='/sign-up' element={<Register onRegister={handleRegister} title="Регистрация" buttonText="Зарегистрироваться" />} />
-          <Route exact path='/sign-in' element={<Login onLogin={handleLogin} title="Вход" buttonText="Войти" />} />
+          <Route exact path="/" element={loggedIn ? <Navigate to="/react-mesto-auth" replace /> : <Navigate to="/signin" replace />}/>
+          <Route exact path='/signup' element={<Register onRegister={handleRegister} title="Регистрация" buttonText="Зарегистрироваться" />} />
+          <Route exact path='/signin' element={<Login onLogin={handleLogin} title="Вход" buttonText="Войти" />} />
           <Route path='/react-mesto-auth' element ={<ProtectedRouteElement
             element={Main}
             path="/"
