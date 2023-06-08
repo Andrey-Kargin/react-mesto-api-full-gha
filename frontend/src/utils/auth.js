@@ -45,7 +45,10 @@ class Auth {
   }
   
   const auth = new Auth({
-    baseUrl: "https://api.mesto.andreykargin.nomoredomains.rocks"
+    baseUrl: "http://api.mesto.andreykargin.nomoredomains.rocks",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   
 export default auth;
