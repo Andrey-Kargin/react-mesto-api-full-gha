@@ -32,7 +32,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => { 
-    const jwt = localStorage.getItem("token"); 
+    const jwt = localStorage.getItem("jwt"); 
     if (jwt) { 
       auth 
         .checkToken(jwt) 
