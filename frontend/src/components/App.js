@@ -32,7 +32,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => { 
-    const jwt = localStorage.getItem("jwt"); 
+    const jwt = localStorage.getItem("token"); 
     if (jwt) { 
       auth 
         .checkToken(jwt) 
@@ -48,9 +48,6 @@ function App() {
   }, []); 
  
   useEffect(() => { 
-    if (loggedIn) {
-
-    }
     Promise.all([ api.getUserInfo(), api.getInitialCards() ]) 
       .then(res => { 
         const [ userInfo, cardsArray ] = res; 
@@ -59,7 +56,7 @@ function App() {
       }) 
       .catch(err => console.log(err)); 
      
-  }, [loggedIn])
+  }, [])
 
   //авторизация пользователя на странице
   function handleLogin(userData) {

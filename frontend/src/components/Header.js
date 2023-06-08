@@ -23,7 +23,7 @@ function Header(props) {
         <Routes>
           <Route exact path='/signin' element ={
             <div className='header__info'>
-          <NavLink to="/sign-up" className="header__link">
+          <NavLink to="/signup" className="header__link">
             Регистрация
           </NavLink>
           </div>
@@ -31,7 +31,7 @@ function Header(props) {
           />
           <Route exact path='/signup' element ={
             <div className='header__info'>
-          <NavLink to="/sign-in" className="header__link">
+          <NavLink to="/signin" className="header__link">
             Войти
           </NavLink>
           </div>
