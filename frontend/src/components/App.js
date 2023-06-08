@@ -56,7 +56,7 @@ function App() {
       }) 
       .catch(err => console.log(err)); 
      
-  }, [loggedIn])
+  }, [])
 
   //авторизация пользователя на странице
   function handleLogin(userData) {
@@ -82,7 +82,7 @@ function App() {
     auth
       .register(regUserData)
       .then(() => {
-        navigate("/signin", { replace: true });
+        navigate("/sign-in", { replace: true });
         setIsRegistrationSuccess(true);
         handleSignup("Вы успешно зарегистрировались!");
       })
@@ -101,7 +101,7 @@ function App() {
   function handleSignout() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
-    navigate("/signin", { replace: true });
+    navigate("/sign-in", { replace: true });
   }
 
   function closeAllPopups() {
@@ -209,25 +209,22 @@ function App() {
      email={email}
     />
         <Routes>
-          <Route exact path='/signup' element={<Register onRegister={handleRegister} title="Регистрация" buttonText="Зарегистрироваться" />} />
-          <Route exact path='/signin' element={<Login onLogin={handleLogin} title="Вход" buttonText="Войти" />} />
-          <Route element={<ProtectedRouteElement loggedIn={loggedIn} />}></Route>
-          <Route path='/' element ={
-            <>
-              <Main
-               onEditProfile={setIsEditProfilePopupOpen}
-               onEditAvatar={setIsEditAvatarPopupOpen}
-               onAddPlace={setIsAddPlacePopupOpen}
-               cards={cards}
-               onCardLike={handleCardLike}
-               onCardClick={setSelectedCard}
-               onCardDelete={handleCardDelete}
-               loggedIn={loggedIn}
-               email={email}
-              />
-            </>
-          }
-          />
+          <Route exact path="/" element={loggedIn ? <Navigate to="/react-mesto-auth" replace /> : <Navigate to="/sign-in" replace />}/>
+          <Route exact path='/sign-up' element={<Register onRegister={handleRegister} title="Регистрация" buttonText="Зарегистрироваться" />} />
+          <Route exact path='/sign-in' element={<Login onLogin={handleLogin} title="Вход" buttonText="Войти" />} />
+          <Route path='/react-mesto-auth' element ={<ProtectedRouteElement
+            element={Main}
+            path="/"
+            onEditProfile={setIsEditProfilePopupOpen}
+            onEditAvatar={setIsEditAvatarPopupOpen}
+            onAddPlace={setIsAddPlacePopupOpen}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardClick={setSelectedCard}
+            onCardDelete={handleCardDelete}
+            loggedIn={loggedIn}
+            email={email}
+          />} />
         </Routes>
         <ImagePopup 
           card={selectedCard}
