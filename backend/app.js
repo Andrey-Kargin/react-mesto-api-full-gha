@@ -24,8 +24,14 @@ const { PORT = 3000, MONGO_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process
 mongoose.connect(MONGO_URL);
 
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use(express.json());
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', loginValidation, login);
 app.post('/signup', createUserValidation, createUser);
