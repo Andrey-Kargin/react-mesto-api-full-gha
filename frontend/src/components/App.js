@@ -39,8 +39,8 @@ function App() {
         .then((res) => { 
           if (res) { 
             setLoggedIn(true); 
-            navigate("/react-mesto-auth"); 
-            setEmail(res.data.email); 
+            navigate("/"); 
+            setEmail(res.email); 
           } 
         }) 
         .catch((err) => console.log(err)); 
@@ -165,17 +165,17 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     
-    api.changeLikeCardStatus(isLiked, card.id )
+    api.changeLikeCardStatus(!isLiked, card._id )
     .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card.id ? newCard : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
     })
     .catch(err => console.log(err));
   }
 
   function handleCardDelete(card) {
-    setCardToDelete(card.id);
+    setCardToDelete(card._id);
   }
 
   function handleConfirmDelete() {
@@ -209,12 +209,11 @@ function App() {
      email={email}
     />
         <Routes>
-          <Route exact path="/" element={loggedIn ? <Navigate to="/react-mesto-auth" replace /> : <Navigate to="/signin" replace />}/>
+          <Route path='*' element={<Navigate to='/' replace />} />
           <Route exact path='/signup' element={<Register onRegister={handleRegister} title="Регистрация" buttonText="Зарегистрироваться" />} />
           <Route exact path='/signin' element={<Login onLogin={handleLogin} title="Вход" buttonText="Войти" />} />
-          <Route path='/react-mesto-auth' element ={<ProtectedRouteElement
+          <Route path='/' element ={<ProtectedRouteElement
             element={Main}
-            path="/"
             onEditProfile={setIsEditProfilePopupOpen}
             onEditAvatar={setIsEditAvatarPopupOpen}
             onAddPlace={setIsAddPlacePopupOpen}

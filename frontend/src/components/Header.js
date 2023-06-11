@@ -37,7 +37,7 @@ function Header(props) {
           </div>
           }
           />
-        <Route exact path='/react-mesto-auth' element ={
+        <Route exact path='/' element ={
           <>
           <div className='header__info'>
              <p className='header__email'>{props.email}</p>

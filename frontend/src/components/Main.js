@@ -27,14 +27,15 @@ function Main(props) {
           <Card
             card={card}
             key={card._id}
-            id={card._id}
-            owner={card.owner}
-            name={card.name}
-            link={card.link}
-            likes={[...card.likes]}
-            onCardClick={props.onCardClick}
-            onCardLike={props.onCardLike}
-            onCardDelete={props.onCardDelete}
+            onCardClick={(card) => {
+              props.onCardClick(card);
+            }}
+            onCardDelete={(card) => {
+              props.onCardDelete(card);
+            }}
+            onCardLike={(card) => {
+              props.onCardLike(card);
+            }}
           />
         ))}
       </section>
