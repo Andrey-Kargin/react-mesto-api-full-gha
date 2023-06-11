@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+const { errors } = require('celebrate');
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
@@ -46,6 +47,7 @@ app.use(router);
 app.use(auth);
 
 app.use(errorLogger);
+app.use(error);
 
 app.use((err, req, res, next) => {
   const { status = 500, message } = err;
