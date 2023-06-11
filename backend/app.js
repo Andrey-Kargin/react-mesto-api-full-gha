@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const { errors } = require('celebrate');
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
 const router = require('./routes');
@@ -13,6 +13,7 @@ const {
 } = require('./middlewares/validation');
 
 const auth = require('./middlewares/auth');
+
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const {
@@ -40,12 +41,11 @@ app.get('/crash-test', () => {
 app.post('/signin', loginValidation, login);
 app.post('/signup', createUserValidation, createUser);
 
-app.use(auth);
-
 app.use(router);
 
+app.use(auth);
+
 app.use(errorLogger);
-app.use(errors());
 
 app.use((err, req, res, next) => {
   const { status = 500, message } = err;

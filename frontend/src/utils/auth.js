@@ -33,13 +33,12 @@ class Auth {
       }).then(this._getResponseData);
     }
   
-    checkToken() {
-      const jwt = localStorage.getItem('jwt');
+    checkToken(jwt) {
       return fetch(`${this._baseUrl}/users/me`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`,
+          'authorization': `Bearer ${jwt}`,
         },
       }).then(this._getResponseData);
     }

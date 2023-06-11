@@ -37,7 +37,7 @@ function App() {
       auth 
         .checkToken(jwt) 
         .then((res) => { 
-          if (res) { 
+          if (res) {
             setLoggedIn(true); 
             navigate("/"); 
             setEmail(res.email); 
@@ -45,18 +45,20 @@ function App() {
         }) 
         .catch((err) => console.log(err)); 
     } 
-  }, []); 
+  }, [navigate]); 
  
-  useEffect(() => { 
-    Promise.all([ api.getUserInfo(), api.getInitialCards() ]) 
+  useEffect(() => {
+    if (loggedIn) {
+    Promise.all([ api.getUserInfo(), api.getInitialCards() ])
       .then(res => { 
         const [ userInfo, cardsArray ] = res; 
-        setCards(cardsArray); 
-        setCurrentUser(userInfo); 
+        setCards(cardsArray.reverse()); 
+        setCurrentUser(userInfo);
       }) 
       .catch(err => console.log(err)); 
      
-  }, [])
+  }}, [loggedIn])
+  
 
   //авторизация пользователя на странице
   function handleLogin(userData) {
@@ -64,10 +66,10 @@ function App() {
       .login(userData)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem("jwt", res.token);
-          setLoggedIn(true);
           setEmail(userData.email);
-          navigate("/", { replace: true });
+          setLoggedIn(true);
+          localStorage.setItem("jwt", res.token);          
+          navigate("/");
         }
       })
       .catch((err) => {

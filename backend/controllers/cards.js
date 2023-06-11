@@ -14,7 +14,7 @@ const createCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные для удаления карточки'));
+        next(new BadRequestError('Переданы некорректные данные для создания карточки'));
       } else {
         next(err);
       }
@@ -32,7 +32,7 @@ const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
       if (!card) {
-        throw new NotFoundError('Пользователь не найден');
+        throw new NotFoundError('Карточки не существует');
       }
       if (!card.owner.equals(req.user._id)) {
         return next(new ForbiddenError('Невозможно удалить карточку другого пользователя'));
@@ -53,7 +53,7 @@ const likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new NotFoundError('Пользователь не найден');
+        throw new NotFoundError('Карточки не существует');
       }
       return res.send({ data: card });
     })
@@ -71,7 +71,7 @@ const dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new NotFoundError('Пользователь не найден');
+        throw new NotFoundError('Карточки не существует');
       }
       return res.send({ data: card });
     })

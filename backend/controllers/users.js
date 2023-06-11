@@ -42,7 +42,7 @@ const createUser = (req, res, next) => {
             return next(new ConflictError('Пользователь с таким email уже зарегестрирован'));
           }
           if (err.name === 'ValidationError') {
-            return next(new BadRequestError('Пользователь не найден'));
+            return next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
           }
           return next(err);
         });
